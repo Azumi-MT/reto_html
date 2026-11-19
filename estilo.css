@@ -1,27 +1,29 @@
-/* 1. VARIABLES DE COLOR (INVERTIDO: TEMA CLARO LIMPIO) */
-/* Lo que era negro ahora es blanco/claro, y lo que era blanco ahora es negro/oscuro */
-/* 1. VARIABLES DE COLOR (INVERTIDO: TEMA CLARO LIMPIO) */
-/* Lo que era negro ahora es blanco/claro, y lo que era blanco ahora es negro/oscuro */
+/* 1. VARIABLES DE COLOR (TEMA CLARO: BLANCO, NEGRO Y GRIS) */
+/* Guardamos los colores en :root para reutilizarlos con var() en todo el CSS */
 :root {
-    --blanco-puro: #ffffff;     /* Blanco puro para cabecera, pie, tabla e inputs */
-    --fondo-claro: #f4f5f7;     /* Gris muy claro para el fondo general de la página */
-    --superficie: #ffffff;      /* Blanco para el fondo de las tarjetas principales */
-    --gris-borde: #dcdfe4;      /* Gris suave para bordes y separadores */
-    --gris-texto: #555962;      /* Gris medio-oscuro para párrafos y textos secundarios */
-    --negro: #111215;           /* Negro puro para títulos, botones y elementos destacados */
+    --blanco-puro: #ffffff;  /* Blanco puro para cabecera, pie, tabla e inputs */
+    --fondo-claro: #f4f5f7;  /* Gris muy claro para el fondo general de la página */
+    --superficie: #ffffff;   /* Blanco para el fondo de las tarjetas principales */
+    --gris-borde: #dcdfe4;   /* Gris suave para bordes y líneas divisorias */
+    --gris-texto: #555962;   /* Gris medio-oscuro para párrafos y textos secundarios */
+    --negro: #111215;        /* Negro puro para títulos, botones y tarjetas destacadas */
 }
+
 
 /* 2. REINICIO Y ESTILOS GENERALES */
-{
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* El asterisco (*) selecciona todos los elementos para quitar márgenes por defecto */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
+/* Hace que el desplazamiento al hacer clic en el menú sea suave */
 html {
     scroll-behavior: smooth;
 }
 
+/* Organizamos toda la página en columna con Flexbox */
 body {
     display: flex;
     flex-direction: column;
@@ -33,11 +35,13 @@ body {
     line-height: 1.6;
 }
 
+/* Fuente moderna para todos los títulos */
 h1, h2, h3 {
     font-family: 'Poppins', sans-serif;
     letter-spacing: 0.4px;
 }
 
+/* Subtítulos con línea divisoria gris debajo */
 h2 {
     color: var(--negro);
     font-size: 22px;
@@ -50,7 +54,10 @@ h2 {
 p {
     color: var(--gris-texto);
 }
+
+
 /* 3. CABECERA Y MENÚ DE NAVEGACIÓN */
+/* Usamos CSS Grid de 2 columnas: título a la izquierda y botones a la derecha */
 .cabecera {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -66,6 +73,7 @@ p {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
+/* Título principal ubicado en la izquierda */
 .cabecera h1 {
     grid-column: 1;
     grid-row: 1;
@@ -74,6 +82,7 @@ p {
     color: var(--negro);
 }
 
+/* Subtítulo gris debajo del título principal */
 .cabecera p {
     grid-column: 1;
     grid-row: 2;
@@ -82,6 +91,7 @@ p {
     margin-top: 2px;
 }
 
+/* Menú de navegación a la derecha usando Flexbox */
 .menu {
     grid-column: 2;
     grid-row: 1 / 3;
@@ -92,6 +102,7 @@ p {
     gap: 10px;
 }
 
+/* Estilo de botón para cada enlace del menú */
 .menu a {
     color: var(--negro);
     background-color: var(--fondo-claro);
@@ -104,6 +115,7 @@ p {
     transition: all 0.25s ease;
 }
 
+/* Al pasar el cursor, el botón se vuelve negro con letra blanca */
 .menu a:hover {
     background-color: var(--negro);
     color: var(--blanco-puro);
@@ -111,7 +123,9 @@ p {
     transform: translateY(-2px);
 }
 
+
 /* 4. CONTENEDOR PRINCIPAL (CSS GRID) */
+/* Cuadrícula de 2 columnas para que "Sobre mí" quede a la izquierda y "Mis intereses" a la derecha */
 main {
     flex: 1;
     display: grid;
@@ -123,12 +137,15 @@ main {
     padding: 0 20px;
 }
 
+/* Solo Habilidades y Contacto ocupan las 2 columnas completas */
 .seccion,
 #contacto {
     grid-column: 1 / -1;
 }
 
+
 /* 5. TARJETAS Y SECCIONES (FLEXBOX) */
+/* Diseño general de las tarjetas blancas con Flexbox */
 .tarjeta {
     display: flex;
     flex-direction: column;
@@ -145,7 +162,16 @@ main {
     transition: transform 0.25s ease, border-color 0.25s ease;
 }
 
-/* Sección "Sobre mí": texto acoplado a la izquierda e imagen a la derecha */
+.tarjeta:hover {
+    transform: translateY(-3px);
+    border-color: var(--negro);
+}
+
+.tarjeta p {
+    width: 100%;
+}
+
+/* Sección "Sobre mí": texto acoplado a la izquierda e imagen a la derecha con Grid */
 #sobre-mi.hero-sobre-mi {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -154,6 +180,7 @@ main {
     padding: 24px;
 }
 
+/* Columna izquierda con el título, descripción y botón */
 .hero-texto {
     display: flex;
     flex-direction: column;
@@ -174,6 +201,7 @@ main {
     color: var(--gris-texto);
 }
 
+/* Columna derecha con la imagen */
 .hero-imagen {
     display: flex;
     justify-content: center;
@@ -195,7 +223,9 @@ main {
     transform: translateY(-4px) scale(1.02);
 }
 
+
 /* 6. SECCIÓN DE HABILIDADES (TARJETAS NEGRAS CON TEXTO BLANCO) */
+/* Contenedor blanco para la sección de habilidades */
 .seccion {
     display: flex;
     flex-direction: column;
@@ -208,12 +238,14 @@ main {
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
 }
 
+/* Grid automático para organizar las 4 tarjetas de habilidades */
 .contenedor-tarjetas {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 16px;
 }
 
+/* Tarjetas negras con letras blancas para resaltar cada habilidad */
 .tarjeta-servicio {
     display: flex;
     flex-direction: column;
@@ -237,13 +269,20 @@ main {
     font-size: 14px;
 }
 
+.tarjeta-servicio:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
 .subtitulo {
     margin-top: 8px;
     font-size: 18px;
     color: var(--negro);
 }
 
+
 /* 7. TABLA Y LISTA DE METAS */
+/* Tabla limpia con bordes redondeados */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -259,16 +298,190 @@ th, td {
     text-align: left;
 }
 
+/* Cabecera de la tabla en negro con letra blanca */
 th {
     background-color: var(--negro);
     color: var(--blanco-puro);
     font-weight: 700;
 }
 
+td {
+    color: var(--negro);
+}
+
+/* Lista ordenada de metas usando Flexbox en columna */
 ol {
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding-left: 20px;
     color: var(--gris-texto);
+}
+
+
+/* 8. BOTONES, ENLACES Y FORMULARIO DE CONTACTO */
+/* Botones principales en negro con letra blanca */
+.boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 22px;
+    border: 1px solid var(--negro);
+    border-radius: 6px;
+    background-color: var(--negro);
+    color: var(--blanco-puro);
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+/* Al pasar el cursor, el botón se invierte a blanco con letra negra */
+.boton:hover {
+    background-color: var(--blanco-puro);
+    color: var(--negro);
+    transform: translateY(-2px);
+}
+
+/* Botones para los enlaces de correo y Facebook */
+.enlace-contacto {
+    display: inline-block;
+    color: var(--negro);
+    background-color: var(--fondo-claro);
+    border: 1px solid var(--gris-borde);
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.enlace-contacto:hover {
+    background-color: var(--negro);
+    color: var(--blanco-puro);
+    border-color: var(--negro);
+}
+
+/* Formulario de contacto organizado en columna con Flexbox */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin-top: 10px;
+    padding-top: 18px;
+    border-top: 1px solid var(--gris-borde);
+}
+
+form label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--negro);
+}
+
+/* Campos para escribir Nombre, Correo y Mensaje */
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    background-color: var(--blanco-puro);
+    color: var(--negro);
+    border: 1px solid var(--gris-borde);
+    border-radius: 6px;
+    font: inherit;
+    transition: border-color 0.25s ease;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Resalta el borde en negro cuando el usuario escribe en un campo */
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--negro);
+}
+
+form .boton {
+    align-self: flex-start;
+    margin-top: 4px;
+}
+
+
+/* 9. PIE DE PÁGINA */
+/* Pie de página centrado con Flexbox */
+.pie {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--blanco-puro);
+    color: var(--gris-texto);
+    border-top: 1px solid var(--gris-borde);
+    padding: 18px;
+    font-size: 14px;
+}
+
+
+/* 10. ADAPTACIÓN PARA CELULARES (RESPONSIVE) */
+/* En pantallas de 720px o menos, todo se adapta a 1 sola columna */
+@media (max-width: 720px) {
+    .cabecera {
+        position: static; /* En celular la cabecera sube al hacer scroll para no tapar la pantalla */
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 12px 14px;
+        gap: 8px;
+    }
+
+    .cabecera h1 {
+        font-size: 18px;
+    }
+
+    .cabecera p {
+        font-size: 12px;
+    }
+
+    .menu {
+        grid-column: 1;
+        grid-row: 3;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .menu a {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    main {
+        grid-template-columns: 1fr;
+        margin: 20px auto;
+        gap: 16px;
+    }
+
+    .tarjeta,
+    .seccion {
+        padding: 20px;
+    }
+
+    #sobre-mi.hero-sobre-mi {
+        grid-template-columns: 1fr;
+        padding: 24px;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .hero-texto {
+        align-items: center;
+    }
+
+    .hero-imagen .imagen {
+        width: 170px;
+        height: 170px;
+    }
 }
