@@ -17,7 +17,7 @@
 <body>
 
     <header class="cabecera">
-        <h1>Hola, soy Azumi</h1>
+        <h1>bienvenid@ al portafolio de Azumi</h1>
         <p>Estudiante de Ingeniería de Software con IA</p>
 
         <nav class="menu">
@@ -30,21 +30,24 @@
 
     <main>
 
-        <section class="tarjeta" id="sobre-mi">
-            <h2>Sobre mí</h2>
+        <section class="tarjeta hero-sobre-mi" id="sobre-mi">
+            <div class="hero-texto">
+                <h2>Sobre mí</h2>
+                <p>
+                    Soy Azumi, estudiante de Ingeniería de Software con IA
+                    en SENATI. Me considero una persona curiosa,
+                    responsable y con muchas ganas de aprender.
+                    Mi objetivo es crecer profesionalmente y desarrollar
+                    nuevas habilidades en tecnología.
+                </p>
+                <a class="boton" href="#contacto">Contáctame</a>
+            </div>
 
-            <img class="imagen representativa" src="https://stickershop.line-scdn.net/stickershop/v1/product/1410410/LINEStorePC/main.png?v=1" alt="girl animada">
-
-            <p>
-                Soy Azumi, estudiante de Ingeniería de Software con IA
-                en SENATI. Me considero una persona curiosa,
-                responsable y con muchas ganas de aprender.
-                Mi objetivo es crecer profesionalmente y desarrollar
-                nuevas habilidades en tecnología.
-            </p>
-
-            <a class="boton" href="#contacto">Contáctame</a>
+            <div class="hero-imagen">
+                <img class="imagen representativa" src="https://stickershop.line-scdn.net/stickershop/v1/product/1410410/LINEStorePC/main.png?v=1" alt="girl animada">
+            </div>
         </section>
+
 
         <section class="tarjeta">
             <h2>Mis intereses</h2>
@@ -133,17 +136,24 @@
         <section class="tarjeta" id="contacto">
             <h2>Contacto</h2>
 
-            <p>Si deseas comunicarte conmigo, este es mi coreo personal:</p>
+            <p>Si deseas comunicarte conmigo, este es mi correo personal:</p>
+            <a class="enlace-contacto" href="mailto:azumimalquitamayo2@gmail.com">mi_correo@gmail.com</a>
 
-             <a href="mailto:azumimalquitamayo2@gmail.com">mi_correo@gmail.com
+            <p>También puedes encontrarme en facebook:</p>
+            <a class="enlace-contacto" href="https://www.facebook.com/">mi facebook</a>
 
-              </a> 
-             <p>También puedes encontrarme en facebook</p>
+            <form action="#" method="post">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre" required>
 
-              <a href="https://www.facebook.com/">mi facebook
-    
-             </a>
+                <label for="correo">Correo electrónico:</label>
+                <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com" required>
 
+                <label for="mensaje">Mensaje:</label>
+                <textarea id="mensaje" name="mensaje" rows="4" placeholder="Escribe tu mensaje aquí..." required></textarea>
+
+                <button class="boton" type="submit">Enviar mensaje</button>
+            </form>
         </section>
 
     </main>
@@ -151,6 +161,7 @@
     <footer class="pie">
         <p>© 2026 Azumi | Mi portafolio personal</p>
     </footer>
+<a href="#" class="volver-arriba" aria-label="Volver arriba">↑</a>
 
 </body>
 </html>

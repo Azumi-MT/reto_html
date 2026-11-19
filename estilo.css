@@ -1,462 +1,356 @@
-
-/* 1. VARIABLES DE COLORES */
-
-/*
-   :root permite guardar valores que podemos reutilizar
-   en diferentes partes de nuestro CSS.
-
-   --nombre: valor;
-   Para utilizar una variable escribimos var(--nombre).
-*/
-
+/* 1. VARIABLES DE COLOR */
+/* Guardamos la paleta de colores en :root para reutilizarlos con var() */
 :root {
-    --primario: #7b2929;  /* Color principal: gris oscuro */
-    --fondo: #fbc6c6;     /* Color de fondo de la página */
-    --texto: #0f0f10;     /* Color de los textos */
-    --acento: #852323;    /* Color para destacar elementos */
-    --superficie: #f6efef; /* Color blanco de las tarjetas */
+    --primario: #7b2929;   /* Color vino oscuro para cabecera, títulos y bordes */
+    --fondo: #fbc6c6;      /* Color rosado suave para el fondo de la página */
+    --texto: #0f0f10;      /* Color oscuro para que el texto sea fácil de leer */
+    --acento: #852323;     /* Color para destacar botones y bordes de imagen */
+    --superficie: #f6efef; /* Color claro para el fondo de las tarjetas */
+    --hover: #f2a6b0;      /* Color rosado claro al pasar el cursor en el menú */
 }
 
 
-/* 2. REINICIO Y ESTILOS GENERALES*/
-
-/*
-   El asterisco (*) selecciona TODOS los elementos.
-
-   box-sizing: border-box:
-   Hace que el padding y el borde estén incluidos
-   dentro del tamaño total del elemento.
-
-   margin: 0:
-   Elimina los márgenes que vienen por defecto.
-
-   padding: 0:
-   Elimina los espacios internos que vienen por defecto.
-*/
-
+/* 2. REINICIO Y ESTILOS GENERALES */
+/* Quitamos márgenes por defecto y hacemos que el padding no agrande las cajas */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-
-/* Configuración general de la página */
-
+/* Desplazamiento suave cuando hacemos clic en los botones del menú */
 html {
     scroll-behavior: smooth;
-    /* Hace que el desplazamiento entre secciones sea suave */
 }
 
+/* Usamos Flexbox en columna para organizar toda la página de arriba a abajo */
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     font-family: 'Lato', sans-serif;
-    /* Tipo de letra principal */
-
     background-color: var(--fondo);
-    /* Utilizamos nuestra variable de fondo */
-
     color: var(--texto);
-    /* Color general de los textos */
-
-    font-size: 1rem;
-    /* Tamaño de letra base */
-
+    font-size: 16px;
     line-height: 1.6;
-    /* Espacio entre las líneas de texto */
 }
 
-
-/* Configuración de los títulos */
-
+/* Fuente especial para todos los títulos */
 h1, h2, h3 {
     font-family: 'Poppins', sans-serif;
-    /* Aplicamos otra tipografía a los títulos */
 }
 
 h2 {
     color: var(--primario);
-    margin-bottom: 1rem;
-    /* Separamos el título del contenido inferior */
-}
-
-p {
-    margin: 1rem 0;
-    /* Espacio arriba y abajo de cada párrafo */
+    font-size: 23px;
 }
 
 
 /* 3. CABECERA Y MENÚ DE NAVEGACIÓN */
-
-/*
-   .cabecera selecciona los elementos que tengan
-   class="cabecera".
-
-   El punto (.) indica que estamos seleccionando
-   una clase.
-*/
-
+/* Usamos CSS Grid de 2 columnas: título a la izquierda y botones a la derecha */
 .cabecera {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    column-gap: 20px;
     background-color: var(--primario);
-    /* Fondo oscuro */
-
     color: var(--superficie);
-    /* Letras blancas */
-
-    padding: 2.5rem 1.5rem;
-    /* Espacio interno: arriba/abajo y lados */
-
-    text-align: center;
-    /* Centra el texto */
+    padding: 12px 28px; /* Tamaño compacto para que no ocupe tanta pantalla */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Título ubicado en la primera columna y primera fila */
 .cabecera h1 {
-    font-size: 2.2rem;
-    /* Aumenta el tamaño del título principal */
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 22px;
+    line-height: 1.2;
 }
 
+/* Subtítulo debajo del título principal, en la izquierda */
+.cabecera p {
+    grid-column: 1;
+    grid-row: 2;
+    font-size: 13px;
+    margin-top: 2px;
+    opacity: 0.9;
+}
 
-/* Menú de navegación */
-
+/* Menú a la derecha usando Flexbox para poner los botones en fila */
 .menu {
+    grid-column: 2;
+    grid-row: 1 / 3;
     display: flex;
-    /* Activa Flexbox para organizar los enlaces */
-
-    justify-content: center;
-    /* Centra los elementos horizontalmente */
-
+    align-items: center;
+    justify-content: flex-end;
     flex-wrap: wrap;
-    /* Permite que los enlaces bajen de línea
-       si no hay suficiente espacio */
-
-    gap: 1.5rem;
-    /* Espacio entre los enlaces */
-
-    margin-top: 1.5rem;
-    /* Separación respecto al título */
+    gap: 10px;
 }
 
+/* Estilo de botón para cada enlace de la barra de navegación */
 .menu a {
     color: var(--superficie);
-    /* Color blanco para los enlaces */
-
+    background-color: rgba(255, 255, 255, 0.12);
+    padding: 8px 14px;
+    border-radius: 8px;
     text-decoration: none;
-    /* Quita el subrayado */
-
-    font-weight: 700;
-    /* Hace que la letra sea más gruesa */
-
-    transition: color 0.3s ease;
-    /* Suaviza el cambio de color */
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-
-/* :hover se activa cuando colocamos el cursor
-   encima de un elemento */
-
+/* Efecto cuando pasamos el mouse por encima de los botones del menú */
 .menu a:hover {
-    color: #F2A6B0;
-    /* El enlace cambia a un tono rosado */
+    background-color: var(--hover);
+    color: var(--primario);
+    transform: translateY(-2px);
 }
 
 
-/* 4. TARJETAS Y SECCIONES */
+/* 4. CONTENEDOR PRINCIPAL (GRID) */
+/* Organizamos las secciones en una cuadrícula (Grid) de 2 columnas iguales.
+   Así "Sobre mí" queda a la izquierda y "Mis intereses" a la derecha,
+   eliminando los espacios vacíos en la página */
+main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 980px;
+    margin: 28px auto;
+    padding: 0 20px;
+}
 
-/*
-   max-width: limita el ancho máximo.
-   margin: auto: centra horizontalmente.
-   padding: crea espacio interno.
-   border-radius: redondea las esquinas.
-*/
+/* Habilidades y Contacto ocupan las 2 columnas completas (de extremo a extremo) */
+.seccion,
+#contacto {
+    grid-column: 1 / -1;
+}
 
+
+/* 5. TARJETAS Y SECCIONES (FLEXBOX) */
+/* Cada tarjeta usa Flexbox para centrar y ordenar su contenido sin dejar tanto espacio en blanco */
 .tarjeta {
-    max-width: 40rem;
-    margin: 2.5rem auto;
-    padding: 2rem;
-
-    background-color: var(--superficie);
-
-    border-radius: 1rem;
-
-    text-align: center;
-
-    box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.08);
-    /* Agrega una sombra suave */
-}
-
-
-/* Sección que contiene las habilidades */
-
-.seccion {
-    max-width: 65rem;
-    margin: 3rem auto;
-    padding: 1.5rem;
-    text-align: center;
-}
-
-
-/* Fotografía personal */
-
-.foto {
-    width: 12.5rem;
-    /* Ancho de la imagen */
-
-    height: 12.5rem;
-    /* Alto de la imagen */
-
-    border-radius: 50%;
-    /* Convierte la imagen en un círculo */
-
-    border: 0.25rem solid var(--acento);
-    /* Borde de color vino */
-
-    object-fit: cover;
-    /* Evita que la imagen se deforme */
-
-    transition: transform 0.4s ease;
-    /* Prepara una animación suave */
-}
-
-
-/* Efecto al colocar el cursor sobre la fotografía */
-
-.foto:hover {
-    transform: scale(1.05);
-    /* Aumenta ligeramente el tamaño: 1.05 = 105% */
-}
-
-
-/* 5. TARJETAS DE HABILIDADES */
-
-/* Contenedor de las cuatro tarjetas */
-
-.contenedor-tarjetas {
     display: flex;
-    /* Coloca las tarjetas usando Flexbox */
-
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    /* Centra las tarjetas */
-
-    flex-wrap: wrap;
-    /* Permite que se acomoden en varias filas */
-
-    gap: 1.25rem;
-    /* Espacio entre las tarjetas */
-
-    margin-top: 1.5rem;
-}
-
-
-/* Diseño individual de cada tarjeta */
-
-.tarjeta-servicio {
-    flex: 1 1 13rem;
-    /* Permite que las tarjetas crezcan y se adapten */
-
-    padding: 1.5rem;
-
+    gap: 12px;
+    width: 100%;
+    padding: 22px 24px;
     background-color: var(--superficie);
-
-    border: 0.1rem solid var(--primario);
-    /* Agrega un borde oscuro */
-
-    border-radius: 0.75rem;
-    /* Redondea las esquinas */
-
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    /* Anima el movimiento y la sombra */
+}
+
+/* Efecto de elevación suave al pasar el cursor sobre una tarjeta */
+.tarjeta:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+}
+
+/* Los párrafos ocupan todo el ancho de su tarjeta para no dejar bordes vacíos */
+.tarjeta p {
+    width: 100%;
+}
+
+/* Imagen circular de perfil con borde color vino */
+.foto,
+.imagen {
+    width: 145px;
+    height: 145px;
+    border-radius: 50%;
+    border: 4px solid var(--acento);
+    object-fit: cover;
+    background-color: #ffffff;
+    transition: transform 0.4s ease;
+}
+
+/* Efecto zoom suave al pasar el cursor sobre la imagen */
+.foto:hover,
+.imagen:hover {
+    transform: scale(1.05);
 }
 
 
-/* Efecto cuando pasamos el cursor sobre una tarjeta */
+/* 6. SECCIÓN DE HABILIDADES (FLEXBOX Y GRID) */
+/* Contenedor general de la sección de habilidades */
+.seccion {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 24px;
+    background-color: var(--superficie);
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Grid adaptable que acomoda las 4 tarjetas de habilidades automáticamente en columnas */
+.contenedor-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 16px;
+}
+
+/* Diseño de cada tarjeta individual de habilidad usando Flexbox */
+.tarjeta-servicio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    padding: 18px;
+    background-color: #ffffff;
+    border: 2px solid var(--primario);
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
 .tarjeta-servicio:hover {
-    transform: translateY(-0.4rem);
-    /* Mueve la tarjeta un poco hacia arriba */
-
-    box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.12);
-    /* Aumenta la sombra */
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
-
-/* Subtítulo de las habilidades */
-
+/* Subtítulo antes de la tabla */
 .subtitulo {
-    margin: 2rem 0 1rem;
+    margin-top: 8px;
+    font-size: 18px;
+    color: var(--primario);
 }
 
 
-/* 6. TABLA Y LISTA DE METAS */
-
-
-/* Tabla de tecnologías */
-
+/* 7. TABLA Y LISTA DE METAS */
+/* Tabla con bordes unidos y esquinas redondeadas */
 table {
     width: 100%;
-    /* Ocupa todo el ancho disponible */
-
-    margin-top: 1rem;
-
     border-collapse: collapse;
-    /* Une los bordes de las celdas */
-
-    background-color: var(--superficie);
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-
-/* Celdas y encabezados */
-
+/* Espaciado y bordes para las celdas de la tabla */
 th, td {
-    padding: 0.75rem;
-    /* Espacio interno */
-
-    border: 0.1rem solid var(--primario);
-    /* Bordes de las celdas */
-
+    padding: 12px;
+    border: 1px solid var(--primario);
     text-align: center;
-    /* Centra el contenido */
 }
 
-
-/* Encabezado de la tabla */
-
+/* Cabecera de la tabla con fondo oscuro y letra clara */
 th {
     background-color: var(--primario);
     color: var(--superficie);
 }
 
-
-/* Lista ordenada de metas */
-
+/* Lista ordenada de metas organizada en columna con Flexbox */
 ol {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     text-align: left;
-    /* Alinea el texto a la izquierda */
-
-    padding-left: 2rem;
-    /* Separa los números del borde */
-}
-
-ol li {
-    margin: 0.75rem 0;
-    /* Separa cada meta */
+    padding-left: 22px;
 }
 
 
-/* 7. BOTONES Y FORMULARIO */
-
-
-/* Diseño general de los botones */
-
-.boton {
-    display: inline-block;
-    /* Permite aplicar dimensiones y espacios */
-
-    padding: 0.75rem 1.5rem;
-
-    margin: 0.75rem;
-
-    border: 0.1rem solid var(--acento);
-
-    border-radius: 0.5rem;
-
+/* 8. BOTONES Y FORMULARIO */
+/* Botón principal y enlaces de contacto centrados con inline-flex */
+.boton,
+#contacto a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border: 2px solid var(--acento);
+    border-radius: 8px;
     background-color: var(--acento);
-
     color: var(--superficie);
-
     text-decoration: none;
-    /* Quita el subrayado de los enlaces */
-
-    font: inherit;
-    /* Hereda el tipo y tamaño de letra */
-
+    font-weight: 700;
     cursor: pointer;
-    /* Cambia el cursor a una mano */
-
-    transition: background-color 0.3s ease;
-    /* Suaviza el cambio de fondo */
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-
-/* Efecto al pasar el cursor por el botón */
-
-.boton:hover {
+.boton:hover,
+#contacto a:hover {
     background-color: var(--primario);
+    transform: translateY(-2px);
 }
 
-
-/* Organización del formulario */
-
+/* Formulario ordenado en columna con Flexbox */
 form {
     display: flex;
-    /* Activa Flexbox */
-
     flex-direction: column;
-    /* Coloca los campos uno debajo de otro */
-
-    gap: 0.75rem;
-    /* Espacio entre los campos */
-
+    gap: 12px;
     text-align: left;
 }
-
-
-/* Campos para escribir y seleccionar */
 
 input, select {
     width: 100%;
-    /* Ocupan todo el ancho del formulario */
-
-    padding: 0.75rem;
-
-    border: 0.1rem solid var(--primario);
-
-    border-radius: 0.4rem;
-
+    padding: 12px;
+    border: 1px solid var(--primario);
+    border-radius: 6px;
     font: inherit;
 }
 
 
-/*8. PIE DE PÁGINA*/
-
+/* 9. PIE DE PÁGINA */
+/* Centramos el texto del footer con Flexbox */
 .pie {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: var(--primario);
-
     color: var(--superficie);
-
-    text-align: center;
-
-    padding: 1.5rem;
-}
-
-.pie p {
-    margin: 0;
-    /* Quitamos el margen del párrafo */
+    padding: 16px;
+    font-size: 14px;
 }
 
 
-/* 9. ADAPTACIÓN PARA CELULARES */
-
-/*
-   @media permite cambiar los estilos según
-   el tamaño de la pantalla.
-
-   max-width: 40rem significa que estos estilos
-   se aplican cuando la pantalla mide 40rem o menos.
-*/
-
-@media (max-width: 40rem) {
-
-    .tarjeta {
-        margin: 1.5rem 1rem;
-        /* Reducimos los márgenes en pantallas pequeñas */
+/* 10. ADAPTACIÓN PARA CELULARES (RESPONSIVE) */
+/* Cuando la pantalla mide 720px o menos, pasamos las columnas a 1 sola fila */
+@media (max-width: 720px) {
+    .cabecera {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 14px 16px;
+        gap: 10px;
     }
 
     .menu {
-        gap: 0.75rem;
-        /* Acercamos los enlaces del menú */
+        grid-column: 1;
+        grid-row: 3;
+        justify-content: center;
+        gap: 8px;
     }
 
-    .cabecera h1 {
-        font-size: 1.7rem;
-        /* Reducimos el título para celulares */
+    main {
+        grid-template-columns: 1fr;
+        margin: 20px auto;
+        gap: 16px;
     }
+
+    .tarjeta,
+    .seccion {
+        padding: 18px;
+    }
+}
+html { scroll-behavior: smooth; }
+.volver-arriba {
+position: fixed;
+right: 1.25rem;
+bottom: 1.25rem;
+width: 3rem;
+height: 3rem;
+display: grid;
+place-items: center;
+background-color: var(--primario);
+color: white;
+border-radius: 50%;
+text-decoration: none;
 }
